@@ -1,38 +1,74 @@
 {
-  "cols" : [
-    {"id":"", "Title": "Location", "Type":"String"},
-    {"id":"", "Title": "Parent", "Type":"String"},
-    {"id":"", "Title": "Market trade volume (size)", "Type":"number"},
-    {"id":"", "Title": "Market increase/decrease (color)", "Type":"String"}
-  ],
-
-  "rows": [
-    {c:[
-        {v: "Global"},
-        {v: null},
-        {v:0},
-        {v:0}
-    ]},
-    {c:[
-        {v:"Australia"},
-        {v: 'Global'},
-        {v:0},
-        {v:0}
-    ]},
-    {c:[
-        {v: "Europe"},
-        {v: 'Global'},
-        {v:0},
-        {v:0}
-    ]},
-    {c:[
-        {v: "UK"},
-        {v: 'Europe'},
-        {v:21},
-        {v:-5}
-    ]}
-
-
-  ]
-
+   "cols": [
+      {
+         "id": "",
+         "Title": "Resource",
+         "Type": "String"
+      },
+      {
+         "id": "",
+         "Title": "Parent",
+         "Type": "String"
+      },
+      {
+         "id": "",
+         "Title": "Data to be evaluated",
+         "Type": "number"
+      },
+      {
+         "id": "",
+         "Title": "Market increase/decrease (color)",
+         "Type": "String"
+      }
+   ],
+   "rows": [
+      {
+         "c": [
+            {
+               "v": "Global"
+            },
+            {
+               "v": null
+            },
+            {
+               "v": 0
+            },
+            {
+               "v": 0
+            }
+         ]
+      },
+      {
+         "c": [
+            {
+               "v": "Europe"
+            },
+            {
+               "v": "Global"
+            },
+            {
+               "v": 0
+            },
+            {
+               "v": 0
+            }
+         ]
+      },
+      {
+        "c": [
+           {
+              "v": "Germany"
+           },
+           {
+              "v": "Europe"
+           },
+           {
+              "v": 31
+           },
+           {
+              "v": -2
+          }
+        ]
+        } 
+   ]
 }
