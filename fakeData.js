@@ -11,17 +11,17 @@ const generateData = (data, {d=5, b=10, u=5}={}) => {
     let deps, brigs, units
     const branch = genItem(["Navy", "RAF", "Army"][data.childNodes.length], data)
 
-    deps = Math.max(Math.floor(Math.random()*d-1), 1)
+    deps = Math.max(Math.floor(Math.random()*d), 1)
 
     // Make divisions
     for (let i=1; i<=deps; i++) {
         const division = genItem(`Division ${i}`, branch)
-        brigs = Math.max(Math.floor(Math.random()*b-1), 1)
+        brigs = Math.max(Math.floor(Math.random()*b), 1)
 
         // Make brigades
         for (let j=1; j<=brigs; j++) {
             const brigade = genItem(`Brigade ${j}`, division)
-            units = Math.max(Math.floor(Math.random()*u-1), 1)
+            units = Math.max(Math.floor(Math.random()*u), 1)
 
             // Make units
             for (let k=1; k<=units; k++) {
