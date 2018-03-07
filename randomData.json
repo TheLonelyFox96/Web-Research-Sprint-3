@@ -1,0 +1,28 @@
+{
+  "Weapons": {
+    "Ak47": "123",
+    "M884": "589",
+    "cr49R": "45",
+    "tpr487": "646",
+    "prk458": "589"
+  },
+  "Divisions": {
+    "Naval_Service": "456",
+    "Royal_Navy": "452",
+    "Royal_Marines": "1256",
+    "British_Army": "522",
+    "Royal_Air_Force": "156"
+  },
+  "Countries": {
+    "UK": "456",
+    "Germany": "265",
+    "Japan": "321",
+    "USA": "202",
+    "Spain": "852",
+    "France": "456",
+    "Korea": "996",
+    "Canada": "256",
+    "Vietnam": "2036",
+    "Australia": "415"
+  }
+}
