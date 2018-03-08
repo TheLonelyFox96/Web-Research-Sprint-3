@@ -52,7 +52,6 @@ function drawChart() {
                 useWeightedAverageForAggregation: true
             };
 
-            console.log(document.getElementById('chart_div'));
 
             const chart = new google.visualization.TreeMap(document.getElementById('chart_div'));
 
