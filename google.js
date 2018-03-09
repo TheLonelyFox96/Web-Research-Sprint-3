@@ -43,11 +43,11 @@ function drawChart() {
                 minHighlightColor: '#8c6bb1',
                 midHighlightColor: '#9ebcda',
                 maxHighlightColor: '#edf8fb',
-                minColor: '#009688',
-                midColor: '#f7f7f7',
-                maxColor: '#ee8100',
+                minColor: '#60BD68',
+                midColor: '#5DA5DA',
+                maxColor: '#F15854',
                 headerHeight: 15,
-                showScale: true,
+                showScale: false,
                 height: 500,
                 useWeightedAverageForAggregation: true
             };
