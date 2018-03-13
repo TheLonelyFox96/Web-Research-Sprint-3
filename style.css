@@ -13,3 +13,7 @@ body {
    height:60px;
    background-color:#74AFAD;
 }
+
+#chart_div.chartStyle{
+  margin-top:100px;
+}
