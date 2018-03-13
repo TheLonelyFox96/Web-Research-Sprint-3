@@ -83,14 +83,14 @@ function drawChart() {
         highlightOnMouseOver: true,
         maxDepth: 1,
         maxPostDepth: 6,
-        minHighlightColor: '#8c6bb1',
-        midHighlightColor: '#9ebcda',
-        maxHighlightColor: '#edf8fb',
+        minHighlightColor: '#eaeaea',
+        midHighlightColor: '',
+        maxHighlightColor: '#eaeaea',
         minColor: '#60BD68',
         midColor: '#5DA5DA',
         maxColor: '#F15854',
         headerHeight: 15,
-        showScale: true,
+        showScale: false,
         height: 500,
         useWeightedAverageForAggregation: true
     };
