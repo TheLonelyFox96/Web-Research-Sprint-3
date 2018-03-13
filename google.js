@@ -42,7 +42,7 @@ function drawChart() {
                 maxPostDepth: 2,
                 minHighlightColor: '#8c6bb1',
                 midHighlightColor: '#9ebcda',
-                maxHighlightColor: '#edf8fb',
+               maxHighlightColor: '#edf8fb',
                 minColor: '#60BD68',
                 midColor: '#5DA5DA',
                 maxColor: '#F15854',
