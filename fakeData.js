@@ -26,7 +26,10 @@ const generateData = (data, {d=5, b=10, u=5}={}) => {
             for (let k=1; k<=units; k++) {
                 brigade.childNodes.push(genItem(`Unit ${globalIndex}`, brigade, {
                     cost: Math.round(Math.random()*10000)/100,
-                    staff: Math.floor(Math.random()*100)
+                    staff: Math.floor(Math.random()*100),
+                    health: Math.floor(Math.random()*100) + "%",
+                    attack: Math.floor(Math.random()*100) + "%",
+                    speed: Math.floor(Math.random()*50) + "m/s"
                 }))
                 globalIndex++;
             }
