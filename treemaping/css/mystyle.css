@@ -1,0 +1,39 @@
+body {
+	font-family:"Arial";
+}
+
+#controls {
+	position:absolute;
+	left:10px;
+	top:40px;
+	width: 200px;
+}
+
+#container {
+	position:absolute;
+	left:250px;
+	top:60px;
+	width: 600px;
+	height: 500px;
+}
+#smallContainer {
+	position:absolute;
+	left:250px;
+	top:60px;
+	width: 300px;
+	height: 300px;
+}
+#containerFluid{
+	position:absolute;
+	left:250px;
+	right:0px;
+	top:60px;
+	bottom:0px;
+}
+
+#dd {
+	position:absolute;
+	left:10px;
+	top:500px;
+	font-size:9pt;
+}

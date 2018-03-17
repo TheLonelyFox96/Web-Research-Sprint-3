@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="drasticdata.nl" content="author">
+    <meta name="author" content="DrasticData">
+    <meta content="visualization visualisation treemap Free treemapping drastictreemap circles chart"
+          name="description">
+    <meta content="drastictreemap treemap treemapping visualization visualisation bar chart Free" name="keywords">
+
+    <title>DrasticData - Data visualization - Treemapping - Data Projects</title>
+
+    <!-- jquery, jquery-ui, popper&&bootstrap and lodash-->
+    <!--script src="js/jquery-1.11.3.min.js"></script-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script type="text/javascript">
+        // Change JQueryUI plugin names to fix name collision with Bootstrap.
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <link href="css/open-iconic/font/css/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <script src="js/lodash.min.js"></script> <!-- for debounce -->
+
+    <!-- Createjs, purl, Papaparse -->
+    <script type="text/javascript" src="js/easeljs-1.0.0.min.js"></script>
+    <script type="text/javascript" src="js/tweenjs-1.0.0.min.js"></script>
+    <script src="js/purl.js"></script>
+    <script src="js/papaparse.min.js"></script>
+
+    <!-- dropzone -->
+    <script src="js/dropzone.min.js"></script>
+    <link rel="stylesheet" href="css/dropzone.css" type="text/css"/>
+
+    <!-- grid -->
+    <script src="js/ag-grid.min.js"></script>
+    <link rel="stylesheet" href="css/ag-grid.min.css">
+    <link rel="stylesheet" href="css/ag-grid-theme-fresh.min.css">
+
+    <!-- treemapping && decimal -->
+    <script src="js/DrasticTreemap_new.min.js"></script>
+    <!--script src="../DrasticJS/bin/DrasticJS-3.0.5.min.js"></script-->
+    <script src="js/decimal.min.js"></script>
+    <link rel="stylesheet" href="css/treemapping.css">
+    <link rel="stylesheet" href="css/treemappingWeb.css">
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="index.htm">DrasticData</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+            aria-controls="navbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="projects.htm">Projects</a></li>
+            <li class="nav-item active"><a class="nav-link" href="treemapping.htm">Treemapping</a></li>
+            <li class="nav-item"><a class="nav-link" href="downloads.htm">Downloads</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.htm">About</a></li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            <li><img class="domore" src="img2/20150429DoMore2.png"/></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div id="divAll" class="row mt-2 mx-1">
+        <div id="divTitle" class="col-sm-9">
+            <!--Title-->
+            <div class="row justify-content-center">
+                <span id="title"></span>
+
+                <!--Source-->
+                <button id="buttonSource" type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
+                        data-target="#divSource2">source...
+                </button>
+                <div id="divSource2" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Source</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="sourceText"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Subtitle-->
+            <div class="row justify-content-center">
+                <span id="subtitle"></span>
+            </div>
+        </div>
+        <div id="divTitleRight" class="col-sm-3">
+            <div id="divFullScreen" class="text-right">
+                <button id="btnShare" type="button" class="btn btn-default btn-sm" aria-label="fullscreen"
+                        data-toggle="modal" data-placement="bottom" data-target="#divShare">
+                    <span class="oi oi-share" title="share" aria-hidden="true"></span>
+                </button>
+                <div id="divShare" class="modal fade text-center" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Share</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <h6>Link:</h6>
+                                <p id="linkText" class=></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="btnFullScreen" type="button" class="btn btn-default btn-sm" aria-label="fullscreen"
+                        data-toggle="tooltip" data-placement="bottom">
+                    <span id="spanFullScreen" class="oi oi-fullscreen-enter" title="Fullscreen"
+                          aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="left" class="col-sm-9">
+            <div id="ddcontainer">
+
+                <div id="divDrasticVis">
+                </div>
+                <div id="divDrasticGrid" class="ag-fresh">
+                </div>
+                <div id="divUpload">
+                    <div id="divDropzone" class="">
+                        <div id="divDropzone2" action="/t" class="jumbotron dropzone text-center">
+                            <h1 id="jumboTitle">Drop CSV file here ...
+                                <span id="ttCsv" data-toggle="tooltip" data-placement="bottom" data-html="true"
+                                      title="Use a CSV with header row.<br/>Delimiters will be detected automatically.<br/>Use a dot as decimal point.">
+										<sup><small><span id="spanFullScreen" class="oi oi-info"></span></small></sup>
+									</span>
+                            </h1>
+                            <h4 id="jumboText">or click to select file</h4>
+                        </div>
+
+                        <div id="divOrExample" class="text-center">
+                            <h2>or</h2>
+                            <div id="divExamples">
+                                <select name="examples" id="examples"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="right" class="col-sm-3">
+            <form id='controls' autocomplete="off">
+                <div class="dropdown">
+                    <div id="accordion">
+                        <h3 id="h3VisType">Visualisation type</h3>
+                        <div>
+                            <div id="visType"></div>
+                        </div>
+                        <h3 id="h3Size">Size</h3>
+                        <div>
+                            <select name="size" id="size"></select>
+                        </div>
+                        <h3 id="h3XAxis">X-Axis</h3>
+                        <div>
+                            <select name="xAxis" id="xAxis"></select>
+                            <div id="divXZeroBased"></div>
+                        </div>
+                        <h3 id="h3YAxis">Y-Axis</h3>
+                        <div>
+                            <select name="yAxis" id="yAxis"></select>
+                            <div id="divYZeroBased"></div>
+                        </div>
+                        <h3 id="h3Groupby">Group by</h3>
+                        <div>
+                            <select name="groupby" id="groupby"></select>
+                            <select name="groupby" id="groupby2"></select>
+                        </div>
+                        <h3 id="h3Labels">Labels</h3>
+                        <div>
+                            <select name="labels" id="labels"></select>
+                            <br/>
+                            <div id="labelSettings">
+                            </div>
+                        </div>
+                        <h3 id="h3Colors">Colors</h3>
+                        <div>
+                            <select name="colors" id="colors"></select>
+                        </div>
+                        <h3 id="h3Treemap">Treemap settings</h3>
+                        <div>
+                            <div id="fixedLayout">
+                            </div>
+                        </div>
+                        <h3 id="h3Hbar">Bar settings</h3>
+                        <div>
+                            <span>Value of group bars:</span><br/>
+                            <div id="aggrType">
+                            </div>
+                        </div>
+                        <h3 id="h3General">General</h3>
+                        <div>
+                            <div id="divAnimation">
+                                <label for="divSpeed">Animation:&nbsp;</label><span id="speed"></span>
+                                <div id="divSpeed"></div>
+                            </div>
+
+                            <div id="titleSettings">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="DDFooter" class="row justify-content-center mt-3 pb-2">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3 mt-2">
+            <h3>Contact us</h3>
+            <span id="spanFullScreen" class="oi oi-envelope-closed"></span>&nbsp;<a href="mailto:info@drasticdata.nl">info@drasticdata.nl</a><br/>
+        </div>
+        <div class="col-sm-3 mt-2">
+            <h3>Follow us</h3>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-text="DrasticTreemap"
+               data-via="drasticdata">Tweet</a>
+            <script>!function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + '://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }(document, 'script', 'twitter-wjs');</script>
+            <br/>
+            <a href="https://twitter.com/drasticdata" class="twitter-follow-button" data-show-count="false"
+               data-size="small" data-dnt="true">Follow @drasticdata</a>
+            <script>!function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                if (!d.getElementById(id)) {
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = p + '://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                }
+            }(document, 'script', 'twitter-wjs');</script>
+        </div>
+        <div class="col-sm-3 mt-2">
+            <h3>Legal</h3>
+            <a href="mailto:info@drasticdata.nl" data-toggle="modal" data-target="#divCreditsTerms">Terms and
+                Credits</a>
+
+            <div id="divCreditsTerms" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">Terms and Credits</h2>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            By using this service you accept our terms.<br/>
+                            <br/>
+                            THIS SERVICE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+                            INCLUDING BUT NOT LIMITED
+                            TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+                            IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS OR SERVICE PROVIDERS BE LIABLE FOR ANY
+                            CLAIM, DAMAGES OR OTHER
+                            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING BASE, OUT OF OR IN
+                            CONNECTION WITH THE SOFTWARE
+                            OR SERVICE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE OR SERVICE.<br/><br/>
+                            Thanks to <a href="https://www.ag-grid.com/" target="_blank">ag-grid</a> for grid
+                            functionality.<br/>
+                            Thanks to <a href="http://getbootstrap.com/" target="_blank">bootstrap</a> for web design
+                            functionality.<br/>
+                            Thanks to <a href="https://github.com/jfsiii/chromath" target="_blank">chromath</a> for
+                            color manipulation functionality.<br/>
+                            Thanks to <a href="http://www.createjs.com" target="_blank">CreateJS</a> for canvas drawing
+                            and tweening functionality.<br/>
+                            Thanks to <a href="https://github.com/MikeMcl/decimal.js/" target="_blank">Decimal</a> for
+                            arbitrary-precision decimal functionality.<br/>
+                            Thanks to <a href="http://www.dropzonejs.com/" target="_blank">dropzone</a> for file drop
+                            functionality.<br/>
+                            Thanks to <a href="https://d3js.org/" target="_blank">d3</a> for scale functionality.<br/>
+                            Thanks to <a href="https://jquery.com/" target="_blank">jquery</a> for jquery and ui
+                            functionality.<br/>
+                            Thanks to <a href="https://lodash.com" target="_blank">lodash</a> for some utilities.<br/>
+                            Thanks to <a href="http://papaparse.com/" target="_blank">papaparse</a> for csv parsing
+                            features.<br/>
+                            Thanks to <a href="https://github.com/allmarkedup/jQuery-URL-Parser"
+                                         target="_blank">purl</a> for url parsing functionality.<br/>
+                            Thanks to <a href="https://github.com/sindresorhus/screenfull.js/" target="_blank">screenfull</a>
+                            for fullscreen functionality.<br/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+
+/* Overrule height of container */
+#ddcontainer {
+    height: 500px;
+}
+
+div#cont1 {
+    padding-left: 0px;
+    padding-right: 0px;
+}

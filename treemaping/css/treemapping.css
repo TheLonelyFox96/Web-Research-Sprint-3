@@ -1,0 +1,115 @@
+#title {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#left {
+    position: relative; height: 100%;
+    padding-left: 0px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+#right {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+}
+
+#ddcontainer {
+    position: relative; width: 100%;
+}
+#divDrasticVis {
+    position: absolute; width: 100%; height: 100%;
+}
+#canvasDrasticVis {
+    position: absolute; width: 100%; height: 100%;
+}
+#divDrasticGrid {
+    position: absolute; width: 100%; height: 100%;
+}
+
+#upload{
+    margin-top: 25px;
+}
+
+/* Dropzone */
+#divUpload {
+    position: absolute; width: 100%; height: 100%;
+}
+#divDropzone {
+    position: relative; width: 100%; height: 90%;
+}
+#divDropzone2{
+    width: 100%; height: 55%; cursor: pointer;
+    border-style: dashed;
+    border-width: 5px;
+}
+#jumboTitle {cursor: pointer;
+    margin-top: 35px;
+}
+#jumboText {cursor: pointer;}
+#ttCsv  {cursor: pointer;}
+#divOrExample {
+    width: 100%; height: 30%;
+    margin-top: 30px;
+}
+#divExamples {
+    margin-top: 25px;
+}
+
+#divFormats{
+    position: relative; width: 100%; height: 10%;
+    margin-top: 10px;
+}
+#labelSettings {
+    margin-top: 4px;
+}
+#fixedLayout {
+    margin-top: 8px;
+}
+#aggrType {
+    margin-top: 4px;
+}
+#divTitle {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+#title {
+    /* Immitate h3 style: */
+    font-size: 24px;
+    font-weight: 500;
+    color: rgb(90,90,90);
+    line-height: 1.1;
+    margin: 2px 8px 2px 8px;
+}
+#buttonSource {
+    margin-bottom: 2px;
+    margin-left: 5px;
+    vertical-align: bottom;
+}
+.subtitleGrey {
+    font-weight: bold;
+}
+#divAnimation {
+    margin-bottom: 6px;
+}
+#divAll {
+    background: #FFFFFF;
+}
+#divFullScreen {
+    /* display: none; */
+    margin-top: 10px;
+}
+#btnFullScreen {
+    display: none;
+}
+#btnShare {
+    display: none;
+}
+#divTitleRight {
+    padding-right: 8px;
+}

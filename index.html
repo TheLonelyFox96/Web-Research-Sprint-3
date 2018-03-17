@@ -4,8 +4,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="fakeData.js"></script>
-    <script type="text/javascript" src="testing.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Mina" rel="stylesheet">
+    <script type="text/javascript" src="testing3.js"></script>
+    <!--<link href="https://fonts.googleapis.com/css?family" rel="stylesheet">-->
       <link rel="stylesheet" type="text/css" href="style.css">
     <title> Web Research Sprint 3 </title>
   </head>
@@ -15,6 +15,21 @@
     </div>
 
     <div id="chart_div" class="chartStyle"></div>
+
+
+    <label for="groupSelect">Group By:</label><select id="groupSelect">
+        <option value="1" selected="selected">Defence</option>
+        <option value="2">Division </option>
+        <option value="3">brigade</option>
+        <option value="4">Unit</option>
+    </select><br />
+
+    <label for="groupSize">Sort By:</label><select id="groupSize">
+        <option value="3" selected="selected">Staff</option>
+        <option value="4">Health </option>
+        <option value="5">Attack</option>
+        <option value="6">Speed</option>
+    </select><br />
 
   </body>
 </html>

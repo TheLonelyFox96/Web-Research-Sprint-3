@@ -1,0 +1,179 @@
+<!doctype html>
+<meta charset="UTF-8">
+<html>
+<head><title>DrasticData - DrasticTreemap Example</title>
+    <!-- for DrasticTreemap: -->
+    <script type="text/javascript" src="js/easeljs-0.8.1.min.js"></script>
+    <script type="text/javascript" src="js/tweenjs-1.0.0.min.js"></script>
+    <script type="text/javascript" src="js/chromath.min.js"></script>
+    <script type="text/javascript" src="js/DrasticTreemap.min.js"></script>
+    <script type="text/javascript" src="js/fakeData.js"></script>
+
+    <!-- for this example: -->
+    <link type="text/css" rel="stylesheet" href="css/mystyle.css">
+
+    <script type="text/javascript">
+
+        const fakeDatatest = makeData({d: 5, b: 1, u: 2})({d: 3, b: 4, u: 3})({d: 6, b: 4, u: 5});
+
+        console.log(fakeDatatest);
+
+
+        const children = fakeDatatest.childNodes;
+
+        const data = [];
+
+        children.forEach(function (organizationalUnit) {
+            //console.log("Organizational Unit"+organizationalUnit);
+            let toadd = {};
+            //toadd.push(String(i));
+            toadd.organizationalUnit = organizationalUnit.title;
+
+            organizationalUnit.childNodes.forEach(function (division) {
+
+                toadd.division = division.title;
+
+                if (typeof division !== "undefined") {
+                    division.childNodes.forEach(function (brigade) {
+
+                        toadd.brigade = brigade.title;
+
+                        if (typeof brigade !== "undefined") {
+                            brigade.childNodes.forEach(function (unit) {
+                                //toadd[0] = String(i);
+
+                                toadd.unit = unit.title;
+                                toadd.staff = unit.staff;
+                                toadd.health = unit.health;
+                                toadd.attack = unit.attack;
+                                toadd.speed = unit.speed;
+
+                                const javaScript_sucks = clone(toadd);
+
+                                data.push(javaScript_sucks);
+
+                            })
+
+                        }
+                    });
+                }
+            });
+            //console.log(item);
+        });
+
+        function clone(obj) {
+            if (obj == null || typeof(obj) != 'object')
+                return obj;
+
+            var temp = new obj.constructor();
+            for (var key in obj)
+                temp[key] = clone(obj[key]);
+
+            return temp;
+        }
+
+        console.log(data);
+
+        var config = {
+            "container": "container",
+            "sizeColumn": "staff",
+            "labelFunction": myLabelFunction,
+            "colorColumn": "organizationalUnit",
+            "color": [
+                {"value": "Navy", "color": "#FF0000"},
+                {"value": "RAF", "color": "#00FF00"},
+                {"value": "Army", "color": "#00FFFF"}
+            ],
+            "tipTextContentCol": ["division", "brigade", "unit", "staff", "health", "attack", "speed"],
+            "labelFormat": [
+                {"level": 0, "visType": "treemap", "font": "bold 14px Arial", "color": "#000000", "wrap": true},
+                {"level": 0, "visType": "circles", "font": "bold 11px Arial", "color": "#000000", "wrap": true}
+            ],
+            "speed": 0.6,
+            "groupBy": ["organizationalUnit"],
+            "fixedLayout": false
+        };
+        window.onload = function () {
+            window.treemap = new DrasticTreemap(data, config);
+        };
+
+        function myLabelFunction(o) {
+            //return (o.division + "\n" + Math.round(o["staff"]) + "k$");
+            return (o.division );
+        }
+    </script>
+
+</head>
+<body>
+<h3>Example: Label formatting</h3>
+
+<form id='controls' autocomplete="off">
+    <br/><b>sizeColumn:</b>
+    <div id="radioSize">
+        <input type="radio" id="radioSize2" name="radioSize" onclick="treemap.sizeColumn('health')"/><label
+            for="radioSize2">Health</label><br/>
+        <input type="radio" id="radioSize1" name="radioSize" onclick="treemap.sizeColumn('attack')"
+               checked="checked"/><label for="radioSize1">Attack</label><br/>
+        <input type="radio" id="radioSize4" name="radioSize" onclick="treemap.sizeColumn('staff')"
+               checked="checked"/><label for="radioSize4">staff</label><br/>
+        <input type="radio" id="radioSize3" name="radioSize" onclick="treemap.sizeColumn('speed')"
+               checked="checked"/><label for="radioSize3">speed</label><br/>
+    </div>
+    <br/><b>visType</b>
+    <div id="radioVisType">
+        <input type="radio" id="radioVisType1" name="radioVisType" onclick="treemap.visType('treemap')"
+               checked="checked"/><label for="radioVisType1">treemap</label><br/>
+        <input type="radio" id="radioVisType2" name="radioVisType" onclick="treemap.visType('circles')"/><label
+            for="radioVisType2">circles</label><br/>
+        <input type="radio" id="radioVisType3" name="radioVisType" onclick="treemap.visType('hbar')"/><label
+            for="radioVisType3">hbar</label><br/>
+    </div>
+    <br/><b>labelConfig</b><br/>
+    <i>wrap:</i>
+    <div id="radioLabelConfigWrap">
+        <input type="radio" id="radioLabelConfigWrap1" name="radioLabelConfigWrap"
+               onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'wrap': false}, {'level': 0, 'visType': 'circles', 'wrap': false}, {'level': 0, 'visType': 'hbar', 'wrap': false}])"/><label
+            for="radioLabelConfigWrap1">false</label>
+        <input type="radio" id="radioLabelConfigWrap2" name="radioLabelConfigWrap"
+               onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'wrap': true}, {'level': 0, 'visType': 'circles', 'wrap': true}, {'level': 0, 'visType': 'hbar', 'wrap': true}])"
+               checked="checked"/><label for="radioLabelConfigWrap2">true</label><br/>
+    </div>
+    <i>dynamic:</i>
+    <div id="radioLabelConfigDynamic">
+        <input type="radio" id="radioLabelConfigDynamic1" name="radioLabelConfigDynamic"
+               onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'dynamic': false}, {'level': 0, 'visType': 'circles', 'dynamic': false}, {'level': 0, 'visType': 'hbar', 'dynamic': false}])"
+               checked="checked"/><label for="radioLabelConfigDynamic1">false</label>
+        <input type="radio" id="radioLabelConfigDynamic2" name="radioLabelConfigDynamic"
+               onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'dynamic': true}, {'level': 0, 'visType': 'circles', 'dynamic': true}, {'level': 0, 'visType': 'hbar', 'dynamic': true}])"/><label
+            for="radioLabelConfigDynamic2">true</label><br/>
+    </div>
+    <i>ellipsis:</i>
+    <div id="radioLabelConfigEllipsis">
+        <input type="radio" id="radioLabelConfigEllipsis1" name="radioLabelConfigEllipsis"
+               onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'ellipsis': false}, {'level': 0, 'visType': 'circles', 'ellipsis': false}, {'level': 0, 'visType': 'hbar', 'ellipsis': false}])"/><label
+            for="radioLabelConfigEllipsis1">false</label>
+        <input type="radio" id="radioLabelConfigEllipsis2" name="radioLabelConfigEllipsis"
+               onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'ellipsis': true}, {'level': 0, 'visType': 'circles', 'ellipsis': true}, {'level': 0, 'visType': 'hbar', 'ellipsis': true}])"
+               checked="checked"/><label for="radioLabelConfigEllipsis2">true</label><br/>
+    </div>
+    <br/><b>GroupBy</b>
+    <div id="radioGroupBy">
+        <input type="radio" id="radioGroupBy1" name="radioGroupBy" onclick="treemap.groupByCols([])"/><label
+            for="radioGroupBy1">none</label><br/>
+        <input type="radio" id="radioGroupBy2" name="radioGroupBy" onclick="treemap.groupByCols(['organizationalUnit'])"
+               checked="checked"/><label for="radioGroupBy2">Organizational unit </label><br/>
+        <input type="radio" id="radioGroupBy3" name="radioGroupBy" onclick="treemap.groupByCols(['division'])"
+               checked="checked"/><label for="radioGroupBy3">Division</label><br/>
+        <input type="radio" id="radioGroupBy4" name="radioGroupBy" onclick="treemap.groupByCols(['brigade'])"/><label
+            for="radioGroupBy4">Brigade</label><br/>
+        <input type="radio" id="radioGroupBy5" name="radioGroupBy" onclick="treemap.groupByCols(['unit'])"/><label
+            for="radioGroupBy5">Unit</label><br/>
+    </div>
+    <br/><b>Data</b><br/>
+    <a href="javascript:alert(JSON.stringify(data))">The data</a><br/>
+</form>
+
+<div id="container"></div>
+
+</body>
+</html>

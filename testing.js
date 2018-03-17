@@ -33,9 +33,8 @@ function drawChart() {
 
     const children = fakeDatatest.childNodes;
 
-    let i = 0;
     children.forEach(function (organizationalUnit) {
-        //console.log("Organizational Unit"+organizationalUnit);
+        console.log("Organizational Unit"+organizationalUnit);
         data.addRow([organizationalUnit.title, organizationalUnit.parent.title, organizationalUnit.childNodes.length]);
 
         organizationalUnit.childNodes.forEach(function (division) {
@@ -44,34 +43,13 @@ function drawChart() {
 
             if (typeof division !== "undefined") {
                 division.childNodes.forEach(function (brigade) {
-                    //console.log("brigade" + brigade.title);
+                    //console.log("brigade" + brigade);
                     data.addRow([brigade.title, brigade.parent.title, brigade.childNodes.length]);
 
                     if (typeof brigade !== "undefined") {
                         brigade.childNodes.forEach(function (unit) {
                             //console.log("unit"+unit);
-                            //data.addRow([unit.title, unit.parent.title, ]);
-                            data.addRow([unit.title, unit.parent.title, Object.keys(unit).length]);
-
-                            data.addRow([{v: "staff" + i, f: 'Staff: ' + unit.staff}, unit.title, unit.staff]);
-                            data.addRow([{
-                                v: "health" + i,
-                                f: 'Health: ' + unit.health
-                            }, unit.title, parseInt(unit.health)]);
-                            data.addRow([{
-                                v: "attack" + i,
-                                f: 'Attack: ' + unit.attack
-                            }, unit.title, parseInt(unit.attack)]);
-                            data.addRow([{
-                                v: "speed" + i,
-                                f: 'Speed: ' + unit.speed
-                            }, unit.title, parseInt(unit.speed)]);
-
-                            //data.addRow([unit.title, unit.parent.title, unit.staff]);
-                            //data.addRow([unit.title, unit.parent.title, unit.health]);
-                            //data.addRow([unit.title, unit.parent.title, unit.attack]);
-                            //data.addRow([unit.title, unit.parent.title, unit.speed]);
-                            i = i + 1;
+                            data.addRow([unit.title, unit.parent.title, unit.cost]);
                             if (typeof unit !== "undefined") {
                             }
                         })
@@ -100,10 +78,11 @@ function drawChart() {
     //data.addRow(["dsfaads", "divixion 1", 434]);
 
 
+
     const options = {
         highlightOnMouseOver: true,
         maxDepth: 1,
-        maxPostDepth: 3,
+        maxPostDepth: 6,
         minHighlightColor: '#8c6bb1',
         midHighlightColor: '#9ebcda',
         maxHighlightColor: '#edf8fb',
@@ -113,44 +92,57 @@ function drawChart() {
         headerHeight: 15,
         showScale: true,
         height: 500,
-        useWeightedAverageForAggregation: true,
-        generateTooltip: showFullTooltip
-
+        useWeightedAverageForAggregation: true
     };
-
-
-    function showFullTooltip(row, size, value) {
-        console.log(data)
-        if (String(data.getValue(row, 1)).startsWith("Brigade")) {
-            return '<div style="background:#f9fbff; padding:10px; border-style:solid"><H4>' + data.getValue(row, 0) +
-                ' <li>(' + size + ' Staff)</li>' +
-                ' <li>(' + size + ' Health)</li>' +
-                ' <li>(' + size + ' Attack)</li>' +
-                ' <li>(' + size + ' Speed)</li></H4>' +
-                ' </div>';
-        }
-        /* else {
-                    tooltip = '<div class="popup"><h4>' + data.getValue(row, 0) +
-                        ' <small>(' + data.getValue(row, 3) + ')</small></h4>' +
-                        ((data.getValue(row, 4) === null) ? "" : "<b>" + data.getValue(row, 4)) + "</b><br/>" +
-                        ((data.getValue(row, 5) === null) ? "" : data.getValue(row, 5)) +
-                        ((data.getValue(row, 6) === null) ? "" : '<footer>' + data.getValue(row, 6) + '</footer>') +
-                        ' </div>';
-                }*/
-    }
-
-    function showStaticTooltip(row, size, value) {
-        //console.log(data)
-        console.log(data.getValue(row, 0), data.getValue(row, 1), data.getValue(row, 2))
-
-        return '<div style="background:#f9fbff; padding:10px; border-style:solid">' +
-            'The data is:' + data.getValue(row, 0) + data.getValue(row, 1) + data.getValue(row, 2) + '.</div>';
-    }
 
 
     const chart = new google.visualization.TreeMap(document.getElementById('chart_div'));
 
     chart.draw(data, options);
 
+
+    // set up event handlers for the dropdowns
+    $('#groupSelect').change(function () {
+        var column = parseInt($(this).find(':selected').prop('value'));
+        var rows;
+        if (column == 1) {
+            rows = produceRows;
+        }
+        else if (column == 2) {
+            rows = countryRows;
+        }
+        else {
+            alert('something went wrong');
+        }
+        group = google.visualization.data.group(data, [0, column], [{
+            column: 3,
+            type: 'number',
+            label: data.getColumnLabel(3),
+            aggregation: google.visualization.data.sum
+        }, {
+            column: 4,
+            type: 'number',
+            label: data.getColumnLabel(4),
+            aggregation: google.visualization.data.sum
+        }, {
+            column: 5,
+            type: 'number',
+            label: data.getColumnLabel(5),
+            aggregation: google.visualization.data.sum
+        }]);
+        group.addRows(rows);
+        chart.setDataTable(group);
+        chart.draw();
+    });
+    $('#sizeSelect').change(function () {
+        columns[2] = parseInt($(this).find(':selected').prop('value')) - 1;
+        chart.setView({columns: columns});
+        chart.draw();
+    });
+    $('#colorSelect').change(function () {
+        columns[3] = parseInt($(this).find(':selected').prop('value')) - 1;
+        chart.setView({columns: columns});
+        chart.draw();
+    });
 
 }
