@@ -1,7 +1,7 @@
 <!doctype html>
 <meta charset="UTF-8">
 <html>
-<head><title>DrasticData - DrasticTreemap Example</title>
+<head><title>DrasticTreemap Defence</title>
     <!-- for DrasticTreemap: -->
     <script type="text/javascript" src="js/easeljs-0.8.1.min.js"></script>
     <script type="text/javascript" src="js/tweenjs-1.0.0.min.js"></script>
@@ -62,11 +62,11 @@
         });
 
         function clone(obj) {
-            if (obj == null || typeof(obj) != 'object')
+            if (obj == null || typeof(obj) !== 'object')
                 return obj;
 
-            var temp = new obj.constructor();
-            for (var key in obj)
+            const temp = new obj.constructor();
+            for (const key in obj)
                 temp[key] = clone(obj[key]);
 
             return temp;
@@ -74,7 +74,7 @@
 
         console.log(data);
 
-        var config = {
+        const config = {
             "container": "container",
             "sizeColumn": "staff",
             "labelFunction": myLabelFunction,
@@ -99,7 +99,7 @@
 
         function myLabelFunction(o) {
             //return (o.division + "\n" + Math.round(o["staff"]) + "k$");
-            return (o.division );
+            return (o.division);
         }
     </script>
 
@@ -108,16 +108,16 @@
 <h3>Example: Label formatting</h3>
 
 <form id='controls' autocomplete="off">
-    <br/><b>sizeColumn:</b>
+    <br/><b>Order by:</b>
     <div id="radioSize">
         <input type="radio" id="radioSize2" name="radioSize" onclick="treemap.sizeColumn('health')"/><label
             for="radioSize2">Health</label><br/>
         <input type="radio" id="radioSize1" name="radioSize" onclick="treemap.sizeColumn('attack')"
                checked="checked"/><label for="radioSize1">Attack</label><br/>
-        <input type="radio" id="radioSize4" name="radioSize" onclick="treemap.sizeColumn('staff')"
-               checked="checked"/><label for="radioSize4">staff</label><br/>
-        <input type="radio" id="radioSize3" name="radioSize" onclick="treemap.sizeColumn('speed')"
-               checked="checked"/><label for="radioSize3">speed</label><br/>
+        <input type="radio" id="radioSize3" name="radioSize" onclick="treemap.sizeColumn('staff')"
+               checked="checked"/><label for="radioSize3">staff</label><br/>
+        <input type="radio" id="radioSize4" name="radioSize" onclick="treemap.sizeColumn('speed')"
+               checked="checked"/><label for="radioSize4">speed</label><br/>
     </div>
     <br/><b>visType</b>
     <div id="radioVisType">
@@ -156,7 +156,7 @@
                onclick="treemap.labelFormat([{'level': 0, 'visType': 'treemap', 'ellipsis': true}, {'level': 0, 'visType': 'circles', 'ellipsis': true}, {'level': 0, 'visType': 'hbar', 'ellipsis': true}])"
                checked="checked"/><label for="radioLabelConfigEllipsis2">true</label><br/>
     </div>
-    <br/><b>GroupBy</b>
+    <br/><b>Group By</b>
     <div id="radioGroupBy">
         <input type="radio" id="radioGroupBy1" name="radioGroupBy" onclick="treemap.groupByCols([])"/><label
             for="radioGroupBy1">none</label><br/>
